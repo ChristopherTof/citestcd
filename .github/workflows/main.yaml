@@ -29,7 +29,7 @@ jobs:
           NODE_ENV: Test
 
       - name: ⏳ Attente que l'app soit lancé
-        use: jakejarvis/wait-action@v0.1.0
+        uses: jakejarvis/wait-action@v0.1.0
         with:
-          url: 'http://localhost:5173'
+          url: 'http://127.0.0.1:5173'
           timeout: 30
