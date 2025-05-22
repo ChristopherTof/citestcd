@@ -1,0 +1,24 @@
+name: Test E2E->Remix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubunti-latest
+
+    steps:
+      - name: Chekout du code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.jobs
+        uses: actions/detup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: Installations des dépendances
+        uses: npm install
