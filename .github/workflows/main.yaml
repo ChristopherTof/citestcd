@@ -12,13 +12,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Chekout du code
+      - name: 🧐 Chekout du code
         uses: actions/checkout@v4
 
-      - name: Setup Node.jobs
+      - name: ⚙️ Setup Node.jobs
         uses: actions/setup-node@v4
         with:
           node-version: '22.14.0'
 
-      - name: Installations des dépendances
+      - name: 📦 Installations des dépendances
         run: npm install
+
+      - name: 🚀 Lancement du projet
+        run: npm run dev &
+        env:
+          NODE_ENV: Test
+
+      - name: ⏳ Attente que l'app soit lancé
+        use: jakejarvis/wait-action@v0.1.0
+        with:
+          url: 'http://localhost:5173'
+          timeout: 30
