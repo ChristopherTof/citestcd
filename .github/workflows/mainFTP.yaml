@@ -25,6 +25,8 @@ jobs:
 
       - name: 🛠️ Build Remix app
         run: npm run build
+        env:
+          VITE_BASE_URL: /christopher/
 
       - name: 🚀 Start Remix preview server
         run: npm run preview &

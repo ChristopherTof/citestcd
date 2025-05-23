@@ -10,7 +10,7 @@ declare module '@remix-run/node' {
 }
 
 export default defineConfig({
-  base: '/christopher/',
+  base: process.env.BASE_URL || '/',
   plugins: [
     remix({
       future: {
