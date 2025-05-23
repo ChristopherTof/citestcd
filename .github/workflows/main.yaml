@@ -23,7 +23,7 @@ jobs:
       - name: 📦 Installations des dépendances
         run: npm install
 
-       - name: 🛠️ Build Remix app
+      - name: 🛠️ Build Remix app
         run: npm run build
 
       - name: 🚀 Start Remix preview server
@@ -34,7 +34,7 @@ jobs:
       - name: ⏳ Wait for server
         uses: jakejarvis/wait-action@v0.1.0
         with:
-          url: 'http://127.0.0.1:3000' 
+          url: 'http://127.0.0.1:3000'
           timeout: 60
 
       - name: ⚗️ Run Cypress tests
