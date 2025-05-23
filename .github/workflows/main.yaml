@@ -34,7 +34,7 @@ jobs:
           url: 'http://127.0.0.1:5173'
           timeout: 30
 
-      - name:⚗️ Run Cypress tests
+      - name: ⚗️ Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
           start: npm start
