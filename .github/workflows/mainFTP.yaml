@@ -1,4 +1,4 @@
-name: Test E2E->Remix
+name: Test E2E->RemixToFTP
 
 on:
   workflow_dispatch:
@@ -72,5 +72,5 @@ jobs:
           host: ${{ secrets.FTP_HOST }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: .
+          localDir: ./build
           remoteDir: /public_html/christopher

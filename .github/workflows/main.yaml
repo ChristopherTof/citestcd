@@ -1,4 +1,4 @@
-name: Test E2E->Remix
+name: Test E2E->RemixToNetlify
 
 on:
   workflow_dispatch:
