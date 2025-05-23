@@ -55,6 +55,14 @@ jobs:
       - name: 🧐 Chekout du code
         uses: actions/checkout@v4
 
+      - name: ⚙️ Setup Node.jobs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: 📦 Installations des dépendances
+        run: npm install
+
       - name: ⚙️ Install Netlify CLI
         run: npm install -g netlify-cli
 
@@ -65,4 +73,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID
+        run: netlify deploy --prod --site=$NETLIFY_SITE_ID
