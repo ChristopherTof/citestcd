@@ -23,20 +23,23 @@ jobs:
       - name: 📦 Installations des dépendances
         run: npm install
 
-      - name: 🚀 Lancement du projet
-        run: npm run dev &
-        env:
-          NODE_ENV: Test
+       - name: 🛠️ Build Remix app
+        run: npm run build
 
-      - name: ⏳ Attente que l'app soit lancé
+      - name: 🚀 Start Remix preview server
+        run: npm run preview &
+        env:
+          NODE_ENV: test
+
+      - name: ⏳ Wait for server
         uses: jakejarvis/wait-action@v0.1.0
         with:
-          url: 'http://127.0.0.1:5173'
-          timeout: 30
+          url: 'http://127.0.0.1:3000' 
+          timeout: 60
 
       - name: ⚗️ Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://127.0.0.1:5173'
+          wait-on: 'http://127.0.0.1:3000'
           wait-on-timeout: 60
-          config: baseUrl=http://127.0.0.1:5173
+          config: baseUrl=http://127.0.0.1:3000
