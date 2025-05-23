@@ -1,0 +1,79 @@
+name: Test E2E->Remix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧐 Chekout du code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.jobs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: 📦 Installations des dépendances
+        run: npm install
+
+      - name: 🛠️ Build Remix app
+        run: npm run build
+
+      - name: 🚀 Start Remix preview server
+        run: npm run preview &
+        env:
+          NODE_ENV: test
+
+      - name: ⏳ Wait for server
+        uses: jakejarvis/wait-action@v0.1.0
+        with:
+          url: 'http://127.0.0.1:3000'
+          timeout: 60
+
+      - name: ⚗️ Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run dev
+          wait-on: 'http://localhost:5173/'
+          wait-on-timeout: 20
+          config: baseUrl=http://localhost:5173/
+        env:
+          NODE_ENV: dev
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Cloner le code
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Setup Node.jobs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: 📦 Installations des dépendances
+        run: npm install
+
+      - name: ⚙️ Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: 🛠️ Build Remix app
+        run: npm run build
+
+      - name: 📤 Déployer via FTP
+        uses: sebastianpopp/ftp-action@v1.2.0
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: ./dist
+          remoteDir: /public_html/christopher
