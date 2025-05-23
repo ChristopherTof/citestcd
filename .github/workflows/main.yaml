@@ -41,8 +41,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run dev
-          wait-on: 'http://127.0.0.1:5173'
-          wait-on-timeout: 120
-          config: baseUrl=http://127.0.0.1:5173
+          wait-on: 'http://localhost:5173/'
+          wait-on-timeout: 20
+          config: baseUrl=http://localhost:5173/
         env:
           NODE_ENV: dev
