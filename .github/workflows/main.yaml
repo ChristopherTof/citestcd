@@ -34,8 +34,8 @@ jobs:
           url: 'http://127.0.0.1:5173'
           timeout: 30
 
-      - name: Run Cypress tests
+      - name:⚗️ Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          wait-on: 'http://127.0.0.1:5173'
-          wait-on-timeout: 60
+          start: npm start
+          browser: chrome
