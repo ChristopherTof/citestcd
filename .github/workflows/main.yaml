@@ -37,5 +37,6 @@ jobs:
       - name: ⚗️ Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm run dev
-          browser: chrome
+          wait-on: 'http://127.0.0.1:5173'
+          wait-on-timeout: 60
+          config: baseUrl=http://127.0.0.1:5173
